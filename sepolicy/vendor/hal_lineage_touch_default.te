@@ -1,0 +1,2 @@
+# SCT21 のタッチキーの sysfs（/sys/class/sec/sec_touchkey）は、input への名前のリンクを含む。
+allow hal_lineage_touch_default sysfs_sec_touchkey:lnk_file read;

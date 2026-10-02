@@ -2,14 +2,29 @@
 # 各行の SHA-1 は、この版の値に固定する。版が異なる取り出し元では extract-files.sh が不一致を報告する。
 # SoC 共通の blobs は、samsung-msm8974/vendor_samsung の msm8974-common と klte-common を使う。
 
-# Bluetooth firmware
-# TODO: チップが BCM4354 の名前で応答するかを、初回起動時の libbt-vendor のログで確認する。
-vendor/firmware/bcm4354_V0289.0541.hcd|2db8f90f051383f2d9d2dffee7a4cfe622836a4f
+# Audio
+# 音響の補正値（ACDB）。Galaxy S5 の値と異なるため、SCT21 の版を klte-common の配置先へ優先して置く。
+etc/Bluetooth_cal.acdb:vendor/etc/acdbdata/Bluetooth_cal.acdb|0bd4336dd07abdb3380ff1336984d857c69a0533
+etc/General_cal.acdb:vendor/etc/acdbdata/General_cal.acdb|bddac5d5c1f6cc7e3bd2eae7bf48123090f0328f
+etc/Global_cal.acdb:vendor/etc/acdbdata/Global_cal.acdb|93ad3cac840358c00a737f035403a493634c293e
+etc/Handset_cal.acdb:vendor/etc/acdbdata/Handset_cal.acdb|b65133f4f5a3a204a625c348ff9c437401cacf74
+etc/Hdmi_cal.acdb:vendor/etc/acdbdata/Hdmi_cal.acdb|53de122ebc68bf653faff12c669add986929820f
+etc/Headset_cal.acdb:vendor/etc/acdbdata/Headset_cal.acdb|f07f0deb56fec115193ae076635160e67cee3528
+etc/Speaker_cal.acdb:vendor/etc/acdbdata/Speaker_cal.acdb|f022723de185fb8a3703ab1e506f1aa0ac83ab3f
+
+# Sensors
+# SCT21 のセンサーは入力デバイスとして報告されるため、Galaxy S5 の SSP 用の HAL では動かない。
+# 純正の HAL を multihal が読み込む名前（_hals.conf の sensors.vendor.msm8974.so）で置く。
+# libak09911c.so は HAL が名前で dlopen し、/etc/PDC.ini と /etc/PARAM.ini を絶対パスで開く。
+lib/hw/sensors.msm8974.so:vendor/lib/hw/sensors.vendor.msm8974.so|1714dc92c9a8ed1a15d2d3d3d19d625eb53b905e
+lib/libak09911c.so:vendor/lib/libak09911c.so|6fce40381269bd36687bb126ea02e3bf668c2f3d
+etc/PARAM.ini|484181122a164e53a26b48eddc31384acb1f8b53
+etc/PDC.ini|13f4b326cbb762475d4685636b3fe3fb613724cf
 
 # Wi-Fi
-# 配置先の名前は純正のまま変えない。bcmdhd は、チップの版とモジュールの種別（/data/.cid.info）による接尾辞を
-# 付けて nvram を選ぶ。SCT21 の純正のカーネルが読んでいた名前は、純正の /system/etc/wifi の名前である。
-# TODO: 初回起動時のカーネルログ（nvram path=）で、実際に読まれたパスを確認する。
+# 配置先の名前は純正のまま変えない。macloader は MAC アドレスからモジュールの種別（murata）を判定し、
+# 接尾辞の付いた nvram がなければ nvram_net.txt を使う。SCT21 の最終版のファームウェア（7.26.27.1）は
+# CIS の読み出し（cisdump）に対応しないため、純正でも _muratafem1 は選ばれず、nvram_net.txt が使われる。
 etc/wifi/bcmdhd_apsta.bin:vendor/etc/wifi/bcmdhd_apsta.bin|4298728519063ec5a32b35d879d1dc7c5092fd6e
 etc/wifi/bcmdhd_ibss.bin:vendor/etc/wifi/bcmdhd_ibss.bin|1468938dc7c968edf67ae3644f889d0366c2442d
 etc/wifi/bcmdhd_mfg.bin:vendor/etc/wifi/bcmdhd_mfg.bin|d296e02701f949c8d1cd2be5d32e801a11533016

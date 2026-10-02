@@ -12,11 +12,10 @@ $(call inherit-product, vendor/samsung/chagallltekdi/chagallltekdi-vendor.mk)
 PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
 
 # Audio
-# TODO: SCT21 の配線（スピーカー、マイク）に合わせた mixer_paths.xml と audio_platform_info.xml を用意する。
-# PoC では Galaxy S5 用の設定を流用する。WCD9320 は同一だが、経路の名前と数が一致する保証はない。
+# SCT21 のスピーカーは 2 つあり、Galaxy S5 と異なる経路（LINEOUT3/4）を使う。mixer_paths.xml は純正の版を元にする。
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/audio/klte/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
-    $(COMMON_PATH)/audio/klte/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
+    $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
 
 # Display
 # TODO: SCT21 のパネルの輝度と nits の対応を測定する。PoC では Galaxy S5 の値を流用する。
@@ -30,9 +29,32 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/keylayout/klte/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     $(COMMON_PATH)/keylayout/klte/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl
 
+# Fingerprint
+$(call inherit-product, $(COMMON_PATH)/fingerprint/product.mk)
+
+# Init
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/init.chagallltekdi.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.chagallltekdi.rc
+
+# NFC
+$(call inherit-product, $(COMMON_PATH)/nfc/pn547/product.mk)
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet_core_hardware.xml
+
+# RIL
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig \
+    libril_shim \
+    librmnetctl
+
+# Sensors
+# 純正の SCT21 が持つセンサーの機能のみを宣言する。common.mk の既定値は Galaxy S5 の構成である。
+TARGET_SENSOR_PERMISSIONS := accelerometer compass gyroscope light
 
 $(call inherit-product, device/samsung/msm8974-common/common.mk)
 $(call inherit-product, vendor/samsung/klte-common/klte-common-vendor.mk)

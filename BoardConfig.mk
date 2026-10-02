@@ -8,8 +8,9 @@ COMMON_PATH := device/samsung/msm8974-common
 include $(COMMON_PATH)/BoardConfigCommon.mk
 
 # Bluetooth
-# TODO: SCT21 の純正には bt_vendor.conf がないため、Galaxy S5 用の設定を流用する。
-# チップが BCM4350 と BCM4354 のどちらの名前で応答するかは、初回起動時の libbt-vendor のログで確認する。
+# SCT21 のチップ（BCM4354）は BCM4350C0 の名前で応答し、libbt-vendor は bcm4350 の名前のパッチを選ぶ。
+# SCT21 の純正のパッチと Galaxy S5 のパッチはいずれも「BCM4354 37.4MHz SEMCO-B80 K-LTE」の版違いであるため、
+# Galaxy S5 用の設定と新しい版のパッチをそのまま使う。
 BOARD_CUSTOM_BT_CONFIG := $(COMMON_PATH)/bluetooth/vnd_klte.txt
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 
@@ -50,8 +51,18 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 # Fingerprint
 include $(COMMON_PATH)/fingerprint/board.mk
 
-# TODO: RIL。SCT21 は Samsung の libsec-ril.so を使うが、Galaxy S5 の lineage-20 は Qualcomm の RIL に移行済みである。
-# PoC ではモバイルデータ通信を対象外とし、radio の設定を含めない。
+# NFC
+include $(COMMON_PATH)/nfc/pn547/board.mk
+
+# RIL
+# SCT21 の純正は Samsung の libsec-ril.so を使うが、同じ au の Galaxy S5（kltekdi）と同様に、
+# klte-common の Qualcomm の RIL（libril-qc-qmi-1.so）を使う。
+include $(COMMON_PATH)/radio/single/board.mk
+TARGET_LD_SHIM_LIBS += \
+    /system/vendor/lib/libril-qc-qmi-1.so|libril_shim.so
+
+# SELinux
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 include vendor/samsung/chagallltekdi/BoardConfigVendor.mk
 include vendor/samsung/klte-common/BoardConfigVendor.mk

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- SCT21 は音声通話の機能を持たず、モバイル回線をデータ通信のみに使う。 -->
+    <bool name="config_voice_capable">false</bool>
+</resources>

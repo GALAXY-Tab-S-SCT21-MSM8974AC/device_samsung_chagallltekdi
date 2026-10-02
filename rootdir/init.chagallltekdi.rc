@@ -1,0 +1,5 @@
+on boot
+    # 純正のセンサーの HAL は system の権限でこのノードへ書き込み、センサーのイベントの区切り（flush）を要求する。
+    # カーネルはこのノードを root の書き込み専用（0220）で作る。
+    chown system system /sys/devices/virtual/sensors/sensor_dev/flush
+    chmod 0660 /sys/devices/virtual/sensors/sensor_dev/flush

@@ -1,1 +1,13 @@
-# TODO: RIL の設定（rild のライブラリ、ネットワークの種別など）。PoC ではモバイルデータ通信を対象外とする。
+# RIL
+# 値は、同じ au の Galaxy S5（kltekdi）の設定に合わせる。
+persist.data.netmgrd.qos.enable=false
+persist.data.qmi.adb_logmask=0
+persist.qcril.disable_retry=true
+persist.radio.apm_sim_not_pwdn=1
+persist.telephony.oosisdc=false
+ril.subscription.types=NV,RUIM
+ro.ril.telephony.mqanelements=5
+ro.telephony.default_network=9
+ro.use_data_netmgrd=true
+telephony.lteOnGsmDevice=1
+vendor.rild.libpath=/vendor/lib/libril-qc-qmi-1.so
