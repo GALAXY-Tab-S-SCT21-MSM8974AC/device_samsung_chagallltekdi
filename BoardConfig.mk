@@ -14,6 +14,8 @@ BOARD_CUSTOM_BT_CONFIG := $(COMMON_PATH)/bluetooth/vnd_klte.txt
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 
 # Build Fingerprint
+# GMS の端末の登録で使われる値を、認証済みの純正の値に揃える。Play Integrity の判定に使われる値は、
+# GMS のプロセスに対して PIF-inject が別途差し替える。
 BUILD_FINGERPRINT := KDDI/SCT21/SCT21:6.0.1/MMB29M/SCT21KDU1CQG1:user/release-keys
 
 # Display
