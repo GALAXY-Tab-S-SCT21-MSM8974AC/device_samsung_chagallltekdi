@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SCT21（chagallltekdi）のビルドに必要なリポジトリを、LineageOS-UL の lineage-20.0 のマニフェストに追加する。
+  SoC 共通の部分は samsung-msm8974 の各リポジトリ（Galaxy S5 などと共通）を使い、修正が必要なもののみ fork を使う。
+  修正の理由は各項目のコメントに記す。SCT21 固有の blobs（vendor/samsung/chagallltekdi）は、
+  device/samsung/chagallltekdi/extract-files.sh で純正の /system から取り出す。再配布の許諾がないため、本ファイルには含めない。
+-->
+<manifest>
+  <remote name="gh" fetch="https://github.com/" />
+
+  <project path="device/samsung/chagallltekdi" name="GeniusJunP/device_samsung_chagallltekdi" remote="gh" revision="lineage-20" />
+  <!--
+    common の system.prop は ro.sf.lcd_density=480 を固定で設定し、TARGET_SCREEN_DENSITY（SCT21 は 320）と重複して
+    build.prop の生成が失敗する。?= で上書きできるようにした fork を使う。
+  -->
+  <project path="device/samsung/msm8974-common" name="GeniusJunP/device_samsung_msm8974-common" remote="gh" revision="lineage-20" />
+  <project path="kernel/samsung/msm8974" name="GeniusJunP/kernel_samsung_msm8974" remote="gh" revision="lineage-20" clone-depth="1" />
+  <project path="vendor/samsung" name="samsung-msm8974/vendor_samsung" remote="gh" revision="lineage-20" />
+  <!--
+    LineageOS の lineage-20.0 に取り込まれた DNG SDK 1.7.1 の更新は、libdng_sdk に sdk_version を加え、
+    Android 13 の libjpeg-turbo が提供しない SDK 向けの版を要求する。この指定のみを除いた fork を使う。
+  -->
+  <remove-project name="LineageOS/android_external_dng_sdk" />
+  <project path="external/dng_sdk" name="GeniusJunP/android_external_dng_sdk" remote="gh" revision="lineage-20.0" />
+
+  <project path="hardware/samsung" name="LineageOS/android_hardware_samsung" remote="gh" revision="lineage-20" />
+</manifest>
