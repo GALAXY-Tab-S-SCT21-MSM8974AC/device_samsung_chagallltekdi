@@ -1,0 +1,24 @@
+# SCT21 固有の blobs。取り出し元は KDDI 版のファームウェア SCT21KDU1CQG1（Android 6.0.1）である。
+# 各行の SHA-1 は、この版の値に固定する。版が異なる取り出し元では extract-files.sh が不一致を報告する。
+# SoC 共通の blobs は、samsung-msm8974/vendor_samsung の msm8974-common と klte-common を使う。
+
+# Bluetooth firmware
+# TODO: チップが BCM4354 の名前で応答するかを、初回起動時の libbt-vendor のログで確認する。
+vendor/firmware/bcm4354_V0289.0541.hcd|2db8f90f051383f2d9d2dffee7a4cfe622836a4f
+
+# Wi-Fi
+# 配置先の名前は純正のまま変えない。bcmdhd は、チップの版とモジュールの種別（/data/.cid.info）による接尾辞を
+# 付けて nvram を選ぶ。SCT21 の純正のカーネルが読んでいた名前は、純正の /system/etc/wifi の名前である。
+# TODO: 初回起動時のカーネルログ（nvram path=）で、実際に読まれたパスを確認する。
+etc/wifi/bcmdhd_apsta.bin:vendor/etc/wifi/bcmdhd_apsta.bin|4298728519063ec5a32b35d879d1dc7c5092fd6e
+etc/wifi/bcmdhd_ibss.bin:vendor/etc/wifi/bcmdhd_ibss.bin|1468938dc7c968edf67ae3644f889d0366c2442d
+etc/wifi/bcmdhd_mfg.bin:vendor/etc/wifi/bcmdhd_mfg.bin|d296e02701f949c8d1cd2be5d32e801a11533016
+etc/wifi/bcmdhd_sta.bin:vendor/etc/wifi/bcmdhd_sta.bin|1ce5d306d03be90c50ab24f5edbc6896a31402b9
+etc/wifi/nvram_mfg.txt:vendor/etc/wifi/nvram_mfg.txt|92bd655ac68fd8099632e33de6187e9a61aa2dbd
+etc/wifi/nvram_mfg.txt_a0:vendor/etc/wifi/nvram_mfg.txt_a0|f411207ef8d8123eac16da14b33453b4c76568ae
+etc/wifi/nvram_mfg.txt_muratafem1:vendor/etc/wifi/nvram_mfg.txt_muratafem1|318c6f67f50951d20ed827b528ff89309678187d
+etc/wifi/nvram_mfg.txt_muratafem1_a0:vendor/etc/wifi/nvram_mfg.txt_muratafem1_a0|f411207ef8d8123eac16da14b33453b4c76568ae
+etc/wifi/nvram_net.txt:vendor/etc/wifi/nvram_net.txt|696fa41df5900a01cd89abbdf7547bc3705166fd
+etc/wifi/nvram_net.txt_a0:vendor/etc/wifi/nvram_net.txt_a0|e69b1b8181e260d26b5fe609dbb0f6b82784ff1c
+etc/wifi/nvram_net.txt_muratafem1:vendor/etc/wifi/nvram_net.txt_muratafem1|e8d5972578c5464c643dd017a8be561d4a3c372f
+etc/wifi/nvram_net.txt_muratafem1_a0:vendor/etc/wifi/nvram_net.txt_muratafem1_a0|e69b1b8181e260d26b5fe609dbb0f6b82784ff1c
