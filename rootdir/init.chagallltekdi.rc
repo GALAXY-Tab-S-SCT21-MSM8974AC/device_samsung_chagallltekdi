@@ -1,3 +1,8 @@
+on post-fs-data
+    # 地磁気センサーの較正値のファイルは、sepolicy の type_transition により作成時に sensors_data_file となる。
+    # この規則より前に作られたファイルのラベルを直す。
+    restorecon /data/misc/akmd_set.txt
+
 on boot
     # 純正のセンサーの HAL は system の権限でこのノードへ書き込み、センサーのイベントの区切り（flush）を要求する。
     # カーネルはこのノードを root の書き込み専用（0220）で作る。

@@ -1,0 +1,4 @@
+# 地磁気センサーのライブラリ（libak09911c.so）は、較正値を /data/misc/akmd_set.txt に作成して保存する。
+allow hal_sensors_default system_data_file:dir { add_name search write };
+type_transition hal_sensors_default system_data_file:file sensors_data_file "akmd_set.txt";
+allow hal_sensors_default sensors_data_file:file create_file_perms;

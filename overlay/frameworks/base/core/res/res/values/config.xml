@@ -5,4 +5,10 @@
 <resources>
     <!-- SCT21 は音声通話の機能を持たず、モバイル回線をデータ通信のみに使う。 -->
     <bool name="config_voice_capable">false</bool>
+
+    <!-- 指紋の HAL は HIDL の 2.1 であり、Android 12 以降のフレームワークはこの宣言がなければ HAL を探さない。
+         書式は ID:種別:強度であり、2 は指紋、15 は Strong を表す。 -->
+    <string-array name="config_biometric_sensors" translatable="false">
+        <item>0:2:15</item>
+    </string-array>
 </resources>

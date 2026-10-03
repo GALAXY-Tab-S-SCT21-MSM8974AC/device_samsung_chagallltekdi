@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- 値は Galaxy S5（kltekdi）と同じである。同じ指紋の HAL を使うため、HAL の挙動に依存する設定を揃える。 -->
+    <bool name="config_cleanupUnusedFingerprints">false</bool>
+    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
+</resources>
