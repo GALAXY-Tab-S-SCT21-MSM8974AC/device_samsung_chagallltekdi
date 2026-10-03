@@ -1,0 +1,8 @@
+# SCT21 の securefp のトラストレットは /efs/securefp/ を保存先とし、qseecomd の SFS がそれを /efs の直下のハッシュ名の
+# ディレクトリへ変換する。純正の工場出荷時の /efs にも同じ形式のディレクトリがある。/efs の直下に作る項目は
+# sfs_efs_file とし、IMEI などの既存の efs_file には書き込みを許さない。
+allow tee efs_file:dir { r_dir_perms add_name remove_name write };
+type_transition tee efs_file:dir sfs_efs_file;
+type_transition tee efs_file:file sfs_efs_file;
+allow tee sfs_efs_file:dir create_dir_perms;
+allow tee sfs_efs_file:file create_file_perms;

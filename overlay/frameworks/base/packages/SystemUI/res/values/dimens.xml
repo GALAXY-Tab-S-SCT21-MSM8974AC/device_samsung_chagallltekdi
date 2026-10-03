@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- 有線充電のリップルの起点。座標は回転 0 の向き（ホームボタンを下にした横向き）を基準とし、
+         SCT21 の充電口はこの向きで右側面の中央にある。 -->
+    <item name="physical_charger_port_location_normalized_x" type="dimen" format="float">1</item>
+    <item name="physical_charger_port_location_normalized_y" type="dimen" format="float">0.5</item>
+</resources>
