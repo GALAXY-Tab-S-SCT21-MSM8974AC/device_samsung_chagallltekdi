@@ -37,15 +37,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.chagallltekdi.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.chagallltekdi.rc
 
 # NFC
-# SCT21 の PN547 のファームウェア（03.1A）は、純正のライブラリから生成したソースでビルドする（vendor の nfc/）。RF の設定は純正の HAL が書き込む値に合わせる。
-# PRODUCT_COPY_FILES は最初の組を採用するため、conf は継承より前に置く。
-TARGET_PROVIDES_PN547_FW := true
-PRODUCT_PACKAGES += \
-    libpn547_fw
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
-$(call inherit-product, $(COMMON_PATH)/nfc/pn547/product.mk)
-
+# SCT21 の PN547 C1 に対応する NFC の HAL がなく、利用できる HAL は C1 の MW の EEPROM の領域（純正のデータを含む）を
+# 書き換えるため、NFC を組み込まない。
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 

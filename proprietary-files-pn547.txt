@@ -1,4 +1,0 @@
-# PN547 のファームウェア。取り出しにのみ使い、端末へはそのまま置かない。
-# SCT21 のファームウェアは 03.1A であり、Galaxy S5 の 01.1F と系統が異なる。純正のライブラリはテキスト再配置を含み、
-# NFC のプロセスで読み込めないため、extract-files.sh が nfc/gen-pn547-fw.py で C のソースに変換してビルドする。
-vendor/firmware/libpn547_fw.so|354dc22412c64369e92bfd3cd1debbab5ab09a6e

@@ -51,9 +51,6 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 # Fingerprint
 include $(COMMON_PATH)/fingerprint/board.mk
 
-# NFC
-include $(COMMON_PATH)/nfc/pn547/board.mk
-
 # RIL
 # SCT21 の純正は Samsung の libsec-ril.so を使うが、同じ au の Galaxy S5（kltekdi）と同様に、
 # klte-common の Qualcomm の RIL（libril-qc-qmi-1.so）を使う。

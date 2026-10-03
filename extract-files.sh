@@ -35,10 +35,5 @@ fi
 setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false
 
 extract "${MY_DIR}/proprietary-files.txt" "${SRC}"
-extract "${MY_DIR}/proprietary-files-pn547.txt" "${SRC}"
-
-VENDOR_DIR="${ANDROID_ROOT}/vendor/${VENDOR}/${DEVICE}"
-python3 "${MY_DIR}/nfc/gen-pn547-fw.py" \
-    "${VENDOR_DIR}/proprietary/vendor/firmware/libpn547_fw.so" "${VENDOR_DIR}/nfc"
 
 "${MY_DIR}/setup-makefiles.sh"
