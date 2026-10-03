@@ -84,10 +84,6 @@ etc/firmware/cpp_firmware_v1_1_1.fw:vendor/firmware/cpp_firmware_v1_1_1.fw|04b8e
 etc/firmware/cpp_firmware_v1_1_6.fw:vendor/firmware/cpp_firmware_v1_1_6.fw|6b2c9fe0a43a9ce86a921e18faffe4d0a35746ee
 etc/firmware/cpp_firmware_v1_2_0.fw:vendor/firmware/cpp_firmware_v1_2_0.fw|34a3b28a0b21f96a9952c933a26f43b29502b7fd
 
-# NFC
-# SCT21 の PN547 のファームウェアは 03.1A であり、Galaxy S5 の 01.1F と系統が異なる。同じ版を同梱して書き換えを避ける。
-vendor/firmware/libpn547_fw.so|354dc22412c64369e92bfd3cd1debbab5ab09a6e
-
 # Sensors
 # SCT21 のセンサーは入力デバイスとして報告されるため、Galaxy S5 の SSP 用の HAL では動かない。
 # 純正の HAL を multihal が読み込む名前（_hals.conf の sensors.vendor.msm8974.so）で置く。
