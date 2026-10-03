@@ -5,6 +5,9 @@
 DEVICE_PATH := device/samsung/chagallltekdi
 COMMON_PATH := device/samsung/msm8974-common
 
+# VINTF
+TARGET_TOUCH_HAL_MANIFEST := $(DEVICE_PATH)/manifest-touch.xml
+
 include $(COMMON_PATH)/BoardConfigCommon.mk
 
 # Bluetooth

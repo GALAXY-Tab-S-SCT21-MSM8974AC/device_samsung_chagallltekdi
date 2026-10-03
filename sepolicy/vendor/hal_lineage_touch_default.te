@@ -1,2 +1,6 @@
 # SCT21 のタッチキーの sysfs（/sys/class/sec/sec_touchkey）は、input への名前のリンクを含む。
 allow hal_lineage_touch_default sysfs_sec_touchkey:lnk_file read;
+
+# KeyDisabler は /sys/class/sec/sec_touchkey/input/enabled を書き込みで開けるかどうかで対応の有無を判定する。
+# SCT21 ではこの実体が common の file_contexts の input[1-2]/enabled に当たり、sysfs_hal_pwr となる。
+allow hal_lineage_touch_default sysfs_hal_pwr:file rw_file_perms;

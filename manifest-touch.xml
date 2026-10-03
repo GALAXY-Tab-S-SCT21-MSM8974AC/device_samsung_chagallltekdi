@@ -1,0 +1,22 @@
+<manifest version="1.0" type="device">
+    <!-- タッチの HAL は、/sys/class/sec/sec_touchkey/input/enabled を開けるときに限り IKeyDisabler を登録する。
+         SCT21 では 3 つのインターフェースをすべて登録する。宣言と登録が食い違うと、system_server の getService が
+         無期限に待つか、HAL が登録に失敗して終了する。 -->
+    <hal format="hidl">
+        <name>vendor.lineage.touch</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IGloveMode</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IKeyDisabler</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IStylusMode</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</manifest>
