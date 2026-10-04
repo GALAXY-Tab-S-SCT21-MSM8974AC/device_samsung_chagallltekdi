@@ -1,10 +1,22 @@
 # Galaxy Tab S 10.5（SCT21）のデバイスツリー
 
-> **English summary:** Unofficial LineageOS 20 device tree for the au (KDDI) Samsung Galaxy Tab S 10.5 **SCT21** (SM-T807J, codename `chagallltekdi`), a Japan-only Snapdragon 801 (MSM8974PRO-AC) variant — the global Tab S 10.5 models use Exynos. It builds on top of the phone-oriented [samsung-msm8974](https://github.com/samsung-msm8974) trees (shared with the Galaxy S5 / klte) without a tablet family common tree, overriding phone-specific defaults (e.g. screen density via `TARGET_SCREEN_DENSITY`) at the device level. Work in progress; nothing is confirmed working yet. Details below are in Japanese.
+> **English summary:** Unofficial LineageOS 20 device tree for the au (KDDI) Samsung Galaxy Tab S 10.5 **SCT21** (SM-T807J, codename `chagallltekdi`), a Japan-only Snapdragon 801 (MSM8974PRO-AC) variant — the global Tab S 10.5 models use Exynos. It builds on top of the phone-oriented [samsung-msm8974](https://github.com/samsung-msm8974) trees (shared with the Galaxy S5 / klte) without a tablet family common tree, overriding phone-specific defaults (e.g. screen density via `TARGET_SCREEN_DENSITY`) at the device level. Work in progress. The userdata partition is not encrypted (see below). Details below are in Japanese.
 
 au（KDDI）の Galaxy Tab S 10.5（SCT21、SM-T807J、Samsung の製品名は chagallltekdi）を対象とする、LineageOS 20 の非公式のデバイスツリーである。SoC は Qualcomm MSM8974PRO-AC であり、Galaxy S5（klte）と共通の部分は samsung-msm8974 の各リポジトリを使う。
 
-本ツリーは開発中であり、動作の確認された機能はまだない。
+本ツリーは開発中である。
+
+## 動作の状況
+
+| 状況 | 機能 |
+|---|---|
+| 動作を確認した | 起動、画面、明るさの自動調整、タッチ、タッチキー、Wi-Fi、Bluetooth、スピーカー、センサー、背面と前面のカメラ、指紋 |
+| 未確認 | モバイルデータ（SIM での確認をしていない）、カメラのフラッシュ |
+| 組み込まない | NFC（理由は `device.mk` のコメントに記す） |
+
+## 既知の制約
+
+- データの領域（`/data`）は暗号化されない。Android 13 は端末全体の暗号化（FDE）に対応せず、ファイル単位の暗号化（FBE）はカーネルのファイルシステムの暗号化（fscrypt）を要する。共有カーネル（3.4）の msm8974 の機種は、いずれもこれを有効にしていない。共通ツリーは FDE の指定を fstab から除いている（samsung-msm8974 の `0670fc6`）。本ツリーは暗号化を実現しない。
 
 ## 構成
 
