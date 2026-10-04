@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SCT21 の電力プロファイル。純正の framework-res（KitKat）の res/xml/power_profile.xml の計測値を、
+  Android 13 の PowerProfile が読むキーに移したものである。
+  純正に値のないキーは、AOSP の既定値（frameworks/base/core/res/res/xml/power_profile.xml）を記す。
+  このファイルは既定のファイル全体を置き換え、記載のないキーは 0 として扱われるためである。
+-->
+<device name="Android">
+  <!-- 画面。純正の screen.on / screen.full。 -->
+  <item name="screen.on.display0">369</item>
+  <item name="screen.full.display0">1034</item>
+  <!-- 純正に値がないため、AOSP の既定値を記す。 -->
+  <item name="ambient.on.display0">0.1</item>
+
+  <item name="bluetooth.active">106.73</item>
+  <item name="bluetooth.on">1</item>
+  <item name="wifi.on">1</item>
+  <item name="wifi.active">178</item>
+  <item name="wifi.scan">70</item>
+  <array name="wifi.batchedscan">
+    <value>.0002</value>
+    <value>.002</value>
+    <value>.02</value>
+    <value>.2</value>
+    <value>2</value>
+  </array>
+
+  <!-- 純正の dsp.audio / dsp.video。 -->
+  <item name="audio">40</item>
+  <item name="video">616</item>
+
+  <!-- 純正に値がないため、AOSP の既定値を記す。 -->
+  <item name="camera.flashlight">0.1</item>
+  <item name="camera.avg">0.1</item>
+
+  <item name="gps.on">0.5</item>
+  <item name="radio.active">155</item>
+  <item name="radio.scanning">29</item>
+  <array name="radio.on">
+    <value>5.0</value>
+    <value>5.0</value>
+  </array>
+
+  <!--
+    CPU。msm8974 は Krait 4 コアの 1 クラスタである。
+    KitKat の BatteryStatsHelper は「プロセスの user + system 時間 × cpu.active[周波数]」で計算しており、
+    純正の cpu.active はコアの時間あたりの電流として使われていた。Android 13 で同じ使われ方をする
+    cpu.core_power.cluster0 に移し、cpu.active と cpu.cluster_power.cluster0 は 0 にする。
+  -->
+  <array name="cpu.clusters.cores">
+    <value>4</value>
+  </array>
+  <item name="cpu.cluster_power.cluster0">0</item>
+  <item name="cpu.active">0</item>
+  <!--
+    周波数の段は /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state と一致させる。
+    段の数が異なると、周波数ごとの電力の計算全体が外れる。
+  -->
+  <array name="cpu.core_speeds.cluster0">
+    <value>300000</value>
+    <value>422400</value>
+    <value>652800</value>
+    <value>729600</value>
+    <value>883200</value>
+    <value>960000</value>
+    <value>1036800</value>
+    <value>1190400</value>
+    <value>1267200</value>
+    <value>1497600</value>
+    <value>1574400</value>
+    <value>1728000</value>
+    <value>1958400</value>
+    <value>2265600</value>
+    <!--
+      仕様補完: 純正の DT の qcom,cpufreq-table には 2457600 の段があるが、純正の power_profile は
+      この段を記していない。電流の計測値がないため、直前の段の値を使用する。
+    -->
+    <value>2457600</value>
+  </array>
+  <array name="cpu.core_power.cluster0">
+    <value>93</value>
+    <value>122</value>
+    <value>138</value>
+    <value>156</value>
+    <value>196</value>
+    <value>212</value>
+    <value>217</value>
+    <value>229</value>
+    <value>284</value>
+    <value>325</value>
+    <value>355</value>
+    <value>365</value>
+    <value>405</value>
+    <value>461</value>
+    <!-- 仕様補完: 2457600 の段。直前の段の値を使用する。 -->
+    <value>461</value>
+  </array>
+  <!-- KitKat の cpu.idle は power collapse 中の電流であり、Android 13 の cpu.suspend にあたる。 -->
+  <item name="cpu.suspend">3.71</item>
+  <!-- wakelock で起きているがアイドルの間の電流。純正に値がないため、AOSP の既定値を記す。 -->
+  <item name="cpu.idle">0.1</item>
+
+  <item name="battery.capacity">7900</item>
+
+  <!--
+    以下は純正に値がないため、AOSP の既定値を記す。
+    0 は計測値を持たないことを示し、各 PowerCalculator は上の wifi.* と radio.* による計算を使用する。
+    <modem> を省くと、ModemPowerProfile が起動のたびに unexpected key の警告を出力する。
+  -->
+  <array name="memory.bandwidths">
+    <value>22.7</value>
+  </array>
+  <item name="wifi.controller.idle">0</item>
+  <item name="wifi.controller.rx">0</item>
+  <item name="wifi.controller.tx">0</item>
+  <array name="wifi.controller.tx_levels">
+  </array>
+  <item name="wifi.controller.voltage">0</item>
+  <modem>
+    <sleep>0</sleep>
+    <idle>0</idle>
+    <active rat="DEFAULT">
+      <receive>0</receive>
+      <transmit level="0">0</transmit>
+      <transmit level="1">0</transmit>
+      <transmit level="2">0</transmit>
+      <transmit level="3">0</transmit>
+      <transmit level="4">0</transmit>
+    </active>
+  </modem>
+  <item name="modem.controller.voltage">0</item>
+  <array name="gps.signalqualitybased">
+    <value>0</value>
+    <value>0</value>
+  </array>
+  <item name="gps.voltage">0</item>
+</device>
