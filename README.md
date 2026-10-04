@@ -30,13 +30,13 @@ au（KDDI）の Galaxy Tab S 10.5（SCT21、SM-T807J、Samsung の製品名は c
 | 区分 | リポジトリ | ブランチ | 理由 |
 |---|---|---|---|
 | マニフェスト | LineageOS-UL/android | lineage-20.0 | eBPF を持たないカーネル 3.4 でも Android 13 が起動するよう、system/bpf や system/netd などを改造している |
-| デバイスツリー | GeniusJunP/device_samsung_chagallltekdi（本リポジトリ） | lineage-20 | — |
-| SoC 共通のツリー | GeniusJunP/device_samsung_msm8974-common | lineage-20 | samsung-msm8974 の fork。`ro.sf.lcd_density` をデバイス側で上書きできるようにした |
-| カーネル | GeniusJunP/kernel_samsung_msm8974 | lineage-20 | samsung-msm8974 の fork。`lineage_chagallltekdi_defconfig` を追加した |
+| デバイスツリー | GALAXY-Tab-S-SCT21-MSM8974AC/device_samsung_chagallltekdi（本リポジトリ） | lineage-20 | — |
+| SoC 共通のツリー | GALAXY-Tab-S-SCT21-MSM8974AC/device_samsung_msm8974-common | lineage-20 | samsung-msm8974 の fork。`ro.sf.lcd_density` をデバイス側で上書きできるようにした |
+| カーネル | GALAXY-Tab-S-SCT21-MSM8974AC/kernel_samsung_msm8974 | lineage-20 | samsung-msm8974 の fork。`lineage_chagallltekdi_defconfig` を追加した |
 | SoC 共通の blobs | samsung-msm8974/vendor_samsung | lineage-20 | — |
 | Samsung 用の HAL | LineageOS/android_hardware_samsung | lineage-20 | — |
-| DNG SDK | GeniusJunP/android_external_dng_sdk | lineage-20.0 | 本家の更新が Android 13 にない SDK 向けの libjpeg を要求するため、その指定を除いた |
-| UL のフォーク 12 件 | GeniusJunP/android_*-ul | lineage-20.0 | UL は 2025-04 で更新が止まり、本家はセキュリティの修正を取り込み続けている。本家の更新を取り込んだ fork |
+| DNG SDK | GALAXY-Tab-S-SCT21-MSM8974AC/android_external_dng_sdk | lineage-20.0 | 本家の更新が Android 13 にない SDK 向けの libjpeg を要求するため、その指定を除いた |
+| UL のフォーク 12 件 | GALAXY-Tab-S-SCT21-MSM8974AC/android_*-ul | lineage-20.0 | UL は 2025-04 で更新が止まり、本家はセキュリティの修正を取り込み続けている。本家の更新を取り込んだ fork |
 | APN | LineageOS/android_vendor_apn | main | 本家は APN のデータを vendor/lineage から移した |
 
 ## ビルドの手順
@@ -45,8 +45,8 @@ au（KDDI）の Galaxy Tab S 10.5（SCT21、SM-T807J、Samsung の製品名は c
    ```
    repo init -u https://github.com/LineageOS-UL/android.git -b lineage-20.0 --git-lfs
    mkdir -p .repo/local_manifests
-   curl -fsSL -o .repo/local_manifests/chagallltekdi.xml https://raw.githubusercontent.com/GeniusJunP/device_samsung_chagallltekdi/lineage-20/local_manifests/chagallltekdi.xml
-   curl -fsSL -o .repo/local_manifests/upstream.xml https://raw.githubusercontent.com/GeniusJunP/device_samsung_chagallltekdi/lineage-20/local_manifests/upstream.xml
+   curl -fsSL -o .repo/local_manifests/chagallltekdi.xml https://raw.githubusercontent.com/GALAXY-Tab-S-SCT21-MSM8974AC/device_samsung_chagallltekdi/lineage-20/local_manifests/chagallltekdi.xml
+   curl -fsSL -o .repo/local_manifests/upstream.xml https://raw.githubusercontent.com/GALAXY-Tab-S-SCT21-MSM8974AC/device_samsung_chagallltekdi/lineage-20/local_manifests/upstream.xml
    repo sync -c
    ```
 2. SCT21 固有の blobs を取り出す。取り出し元は、KDDI 版のファームウェア `SCT21KDU1CQG1`（Android 6.0.1）の `/system` である。端末を adb で接続して引数なしで実行するか、展開済みの `/system` のパスを引数に与える。`proprietary-files.txt` の各行は、この版の SHA-1 に固定されている。

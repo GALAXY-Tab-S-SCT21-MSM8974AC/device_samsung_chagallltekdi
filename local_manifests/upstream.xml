@@ -7,32 +7,32 @@
   <!-- 本家は 2025-11 に APN のデータを vendor/lineage から vendor/apn へ移した（vendor/lineage の dda13281）。 -->
   <project path="vendor/apn" name="LineageOS/android_vendor_apn" remote="github" revision="main" />
   <!--
-    本家に遅れている UL のフォークを、本家の lineage-20.0 を取り込んだ fork（GeniusJunP/<元の名前>-ul）に差し替える。
+    本家に遅れている UL のフォークを、本家の lineage-20.0 を取り込んだ fork（GALAXY-Tab-S-SCT21-MSM8974AC/<元の名前>-ul）に差し替える。
     取り込みは scripts/wsl/merge-upstream.sh で行い、競合はなかった（research/compare-ul.sh で試算した）。
     UL の変更（BPF のないカーネルへの対応など）はそのまま残る。
   -->
   <remove-project name="LineageOS-UL/android_bionic" />
-  <project path="bionic" name="GeniusJunP/android_bionic-ul" remote="github" revision="lineage-20.0" />
+  <project path="bionic" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_bionic-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_frameworks_av" />
-  <project path="frameworks/av" name="GeniusJunP/android_frameworks_av-ul" remote="github" revision="lineage-20.0" />
+  <project path="frameworks/av" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_frameworks_av-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_frameworks_base" />
-  <project path="frameworks/base" name="GeniusJunP/android_frameworks_base-ul" remote="github" revision="lineage-20.0" />
+  <project path="frameworks/base" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_frameworks_base-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_frameworks_native" />
-  <project path="frameworks/native" name="GeniusJunP/android_frameworks_native-ul" remote="github" revision="lineage-20.0" />
+  <project path="frameworks/native" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_frameworks_native-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_frameworks_opt_telephony" />
-  <project path="frameworks/opt/telephony" name="GeniusJunP/android_frameworks_opt_telephony-ul" remote="github" revision="lineage-20.0" />
+  <project path="frameworks/opt/telephony" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_frameworks_opt_telephony-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_hardware_ril" />
-  <project path="hardware/ril" name="GeniusJunP/android_hardware_ril-ul" remote="github" revision="lineage-20.0" />
+  <project path="hardware/ril" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_hardware_ril-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_packages_apps_Nfc" />
-  <project path="packages/apps/Nfc" name="GeniusJunP/android_packages_apps_Nfc-ul" remote="github" revision="lineage-20.0" />
+  <project path="packages/apps/Nfc" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_packages_apps_Nfc-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_packages_modules_adb" />
-  <project path="packages/modules/adb" name="GeniusJunP/android_packages_modules_adb-ul" remote="github" revision="lineage-20.0" />
+  <project path="packages/modules/adb" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_packages_modules_adb-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_packages_modules_Bluetooth" />
-  <project path="packages/modules/Bluetooth" name="GeniusJunP/android_packages_modules_Bluetooth-ul" remote="github" revision="lineage-20.0" />
+  <project path="packages/modules/Bluetooth" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_packages_modules_Bluetooth-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_packages_modules_Connectivity" />
-  <project path="packages/modules/Connectivity" name="GeniusJunP/android_packages_modules_Connectivity-ul" remote="github" revision="lineage-20.0" />
+  <project path="packages/modules/Connectivity" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_packages_modules_Connectivity-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_packages_modules_Wifi" />
-  <project path="packages/modules/Wifi" name="GeniusJunP/android_packages_modules_Wifi-ul" remote="github" revision="lineage-20.0" />
+  <project path="packages/modules/Wifi" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_packages_modules_Wifi-ul" remote="github" revision="lineage-20.0" />
   <remove-project name="LineageOS-UL/android_vendor_lineage" />
-  <project path="vendor/lineage" name="GeniusJunP/android_vendor_lineage-ul" remote="github" revision="lineage-20.0" />
+  <project path="vendor/lineage" name="GALAXY-Tab-S-SCT21-MSM8974AC/android_vendor_lineage-ul" remote="github" revision="lineage-20.0" />
 </manifest>
